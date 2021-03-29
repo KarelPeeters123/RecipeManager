@@ -16,6 +16,7 @@ class ViewController: UIViewController {
         super.viewDidLoad()
         recipeTable.delegate = self
         recipeTable.dataSource = self
+        
         // Do any additional setup after loading the view.
     }
 
@@ -25,6 +26,12 @@ class ViewController: UIViewController {
 extension ViewController: UITableViewDelegate {
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         print("clicked " + store.getRecipes()[indexPath.row].name);
+        let vc = storyboard?.instantiateViewController(identifier: "recipe") as! RecipeController;
+        vc.title = store.getRecipes()[indexPath.row].name;
+        vc.store = store;
+        vc.currentRecipe = store.getRecipes()[indexPath.row];
+        vc.navigationItem.largeTitleDisplayMode = .never;
+        self.navigationController?.pushViewController(RecipeController(recipeStore: store, recipe: store.getRecipes()[indexPath.row]), animated: true);
     }
 }
 extension ViewController: UITableViewDataSource {
