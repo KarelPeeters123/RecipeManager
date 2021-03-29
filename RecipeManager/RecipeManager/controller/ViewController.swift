@@ -8,20 +8,14 @@
 import UIKit
 
 class ViewController: UIViewController {
+    var store = RecipeStore();
 
     @IBOutlet var recipeTable: UITableView!
-    
-    var recipes = [
-        "Pancakes",
-        "Brownies",
-        "Cinnamon Rolls"
-    ]
     
     override func viewDidLoad() {
         super.viewDidLoad()
         recipeTable.delegate = self
         recipeTable.dataSource = self
-        
         // Do any additional setup after loading the view.
     }
 
@@ -30,16 +24,16 @@ class ViewController: UIViewController {
 
 extension ViewController: UITableViewDelegate {
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        print("clicked row");
+        print("clicked " + store.getRecipes()[indexPath.row].name);
     }
 }
 extension ViewController: UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return recipes.count;
+        return store.getSize();
     }
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "Cell1", for: indexPath)
-        cell.textLabel?.text = recipes[indexPath.row];
-        return cell
+        cell.textLabel?.text = store.getRecipes()[indexPath.row].name;
+        return cell;
     }
 }

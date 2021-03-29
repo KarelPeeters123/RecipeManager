@@ -1,0 +1,32 @@
+//
+//  RecipeStore.swift
+//  RecipeManager
+//
+//  Created by Karel Peeters on 29/03/2021.
+//
+
+import Foundation
+
+class RecipeStore {
+    var recipes = [Recipe]();
+    init() {
+        let recipe1 = Recipe(name: "Pancake", time: 40, difficulty: "Medium", ingredients: [], instructions:[]);
+        let recipe2 = Recipe(name: "Chocolate Cake", time: 40, difficulty: "Medium", ingredients: [], instructions:[])
+        let recipe3 = Recipe(name: "Brownies", time: 40, difficulty: "Medium", ingredients: [], instructions:[])
+        addRecipe(recipe: recipe1);
+        addRecipe(recipe: recipe2);
+        addRecipe(recipe: recipe3);
+    }
+    
+    func addRecipe(recipe: Recipe) {
+        recipes.append(recipe);
+    }
+    
+    func getRecipes() -> [Recipe] {
+        return recipes;
+    }
+    func getSize() -> Int {
+        return recipes.count;
+    }
+    
+}
